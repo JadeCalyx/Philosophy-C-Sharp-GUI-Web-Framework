@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using jcWebGuiTools;
 using NUnit.Framework;
 using TestSets.Utilities;
+using thisClass = TestSets.Tests.SearchTests;
 
 
 namespace TestSets.Tests
@@ -18,12 +19,19 @@ namespace TestSets.Tests
     {
         private AppFile _appFile;
         private jcBrowser _browser;
+        private jcBrowser browser;
         private jcBrowserFactory _browserFactory;
+        private jcBrowserFactory browser_factory;
+        private thisClass I, me, the, to, ask;
+
+
         [OneTimeSetUp]
         public void ClassSetup()
         {
+            I = me = the = to = ask = this;
             _appFile = new AppFile();
             _browserFactory = new jcBrowserFactory("Wikipedia", _appFile.WebPrefix);
+            browser_factory = _browserFactory;
         }
 
         [OneTimeTearDown]
@@ -59,18 +67,15 @@ namespace TestSets.Tests
             Wiki-937")]
         [TestCase("firefox")]
         [TestCase("chrome")]
-        public void PerformValidMainPageSearch(string browserType)
+        public void PerformValidMainPageSearch(string browser_type)
         {
-            _browser = _browserFactory.GetBrowser(browserType);
-            _browser.Maximize();
-            _browser.GotoPage("main-page");
-            var currPage = _browser.GetPage();
-            currPage.SetText("search-box", "archery");
-            currPage.Click("search-button");
-            var pageChanged = _browser.WaitForPageChange();
-            Assume.That(pageChanged, "Page never changed from main search page");
-            var newPage = _browser.GetPage();
-            Assert.That(newPage.Handle.Equals("archery-page"), "error message");
+            the.browser = I.ask.the.browser_factory.to.Get_a_new_browser_instance(browser_type).
+                            and.Maximize_the_window();
+            I.ask.the.browser.to.Goto_page("main-page").
+                and.Set_the_text_of_element("search-box", text: "archery").
+                and.Click("search-button");
+            var the_page_handle = I.ask.the.browser.to.Wait_for_the_page_to_change().and.Get_the_page_handle();
+            Assert.That(the_page_handle.Equals("archery-page"), "error message");
         }
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using thisClass = jcWebGuiTools.jcBrowserFactory;
 
 namespace jcWebGuiTools
 {
@@ -11,6 +12,7 @@ namespace jcWebGuiTools
     /// </summary>
     public class jcBrowserFactory
     {
+        public thisClass to, and;
         string _site;
         string _prefix;
         /// <summary>
@@ -20,6 +22,7 @@ namespace jcWebGuiTools
         /// <param name="prefix">The prefix.</param>
         public jcBrowserFactory(string site, string prefix)
         {
+            to = and = this;
             _site = site;
             _prefix = prefix;
         }
@@ -32,6 +35,25 @@ namespace jcWebGuiTools
         {
             return new jcBrowser(type, _site, _prefix);
         }
+        /// <summary>
+        /// Alias for GetBrowser.
+        /// </summary>
+        /// <param name="browser_type">The browser_type.</param>
+        /// <returns></returns>
+       public jcBrowser Get_a_new_browser_instance(string browser_type)
+        {
+            return GetBrowser(browser_type);
+        }
+        /// <summary>
+        /// Alias for GetBrowser.
+        /// </summary>
+        /// <param name="browser_type">The browser_type.</param>
+        /// <returns></returns>
+        public jcBrowser GetANewBrowserInstance(string browser_type)
+        {
+            return GetBrowser(browser_type);
+        }
+
 
     }
 }

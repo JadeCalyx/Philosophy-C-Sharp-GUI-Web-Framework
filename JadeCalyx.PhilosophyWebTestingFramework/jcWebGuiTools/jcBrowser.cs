@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 using System.Threading;
+using thisClass = jcWebGuiTools.jcBrowser;
 
 
 namespace jcWebGuiTools
@@ -17,6 +18,7 @@ namespace jcWebGuiTools
     /// </summary>
     public class jcBrowser
     {
+        public thisClass to, and;
         IWebDriver _driver;
         jcAddressAtlas _addressAtlas;
         string _site;
@@ -30,6 +32,7 @@ namespace jcWebGuiTools
         /// <param name="urlPrefix">The URL prefix. The base url to be prefixed onto any address.</param>
         public jcBrowser(string driverType, string site, string urlPrefix)
         {
+            to = and = this;
             _site = site;
             _addressAtlas = new jcAddressAtlas(urlPrefix, site);
             setrDriver(driverType);
@@ -57,12 +60,23 @@ namespace jcWebGuiTools
         /// </summary>
         /// <param name="handle">The page handle.</param>
         /// <returns>jcBrowser: this browser object.</returns>
-        public jcBrowser GotoPage(string handle)
+        public jcPage GotoPage(string handle)
         {
             var url = _addressAtlas.GetUrl(handle);
             _driver.Navigate().GoToUrl(url);
-            return this;
+            return this.GetPage();
         }
+        /// <summary>
+        /// Alias for GotoPage
+        /// </summary>
+        /// <param name="handle">The handle.</param>
+        /// <returns></returns>
+        public jcPage Goto_page(string handle)
+        {
+            return GotoPage(handle);
+        }
+
+
         /// <summary>
         /// Waits for the page to change.
         /// </summary>
@@ -90,6 +104,16 @@ namespace jcWebGuiTools
                 return false;
             }
         }
+        /// <summary>
+        /// Wait_for_the_page_to_changes this instance.
+        /// Alias for WaitForPageChange; returns the new page
+        /// </summary>
+        /// <returns></returns>
+        public jcPage Wait_for_the_page_to_change()
+        {
+            this.WaitForPageChange();
+            return GetPage();
+        }
 
         /// <summary>
         /// Goes to a specified url.
@@ -109,6 +133,14 @@ namespace jcWebGuiTools
         {
             _driver.Manage().Window.Maximize();
             return this;
+        }
+        /// <summary>
+        /// Alias for Maximize()
+        /// </summary>
+        /// <returns></returns>
+        public jcBrowser Maximize_the_window()
+        {
+            return this.Maximize();
         }
         /// <summary>
         /// Set the Selenium web driver type.

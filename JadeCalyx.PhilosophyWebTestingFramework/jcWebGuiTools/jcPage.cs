@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
+using thisClass = jcWebGuiTools.jcPage;
 
 namespace jcWebGuiTools
 {
@@ -12,6 +13,7 @@ namespace jcWebGuiTools
     /// </summary>
     public class jcPage
     {
+        public thisClass and, to;
         IWebDriver _driver;
         string _site;
         string _pageHandle;
@@ -24,6 +26,7 @@ namespace jcWebGuiTools
         /// <param name="pageHandle">The page handle.</param>
         public jcPage(IWebDriver driver, string site, string pageHandle)
         {
+            and = to = this;
             _driver = driver;
             _site = site;
             _pageHandle = pageHandle;
@@ -40,6 +43,16 @@ namespace jcWebGuiTools
             get { return _pageHandle; }
             set { }
         }
+        /// <summary>
+        /// Get_the_page_handles this instance.
+        /// Alias for Handle;
+        /// </summary>
+        /// <returns></returns>
+        public string Get_the_page_handle()
+        {
+            return Handle;
+        }
+
         /// <summary>
         /// Determines whether the passed handle is the same as the current handle.
         /// </summary>
@@ -62,6 +75,19 @@ namespace jcWebGuiTools
             el.ThrowIfNotFound(objectHandle).Clear().SetText(textToSet);
             return this;
         }
+        /// <summary>
+        /// Set_the_text_of_elements the specified object_handle.
+        /// Alias for SetText()
+        /// </summary>
+        /// <param name="object_handle">The object_handle.</param>
+        /// <param name="text">The text.</param>
+        /// <returns></returns>
+        public jcPage Set_the_text_of_element(string object_handle, string text)
+        {
+            return SetText(object_handle, text);
+        }
+
+
         /// <summary>
         /// Clicks the specified object.
         /// </summary>
