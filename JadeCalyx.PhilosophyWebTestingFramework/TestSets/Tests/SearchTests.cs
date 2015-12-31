@@ -48,7 +48,7 @@ namespace TestSets.Tests
         [TearDown]
         public void TestTeardown()
         {
-            _browser.Close();
+            browser.Close();
         }
 
         [Test]

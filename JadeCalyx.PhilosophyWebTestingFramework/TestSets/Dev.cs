@@ -77,7 +77,7 @@ namespace TestSets
                 Console.WriteLine("Error closing browser");
             }
         }
-        [Test]
+        //[Test]
         public void TopBar()
         {
             var p = ConfigurationManager.AppSettings["WebPrefix"];

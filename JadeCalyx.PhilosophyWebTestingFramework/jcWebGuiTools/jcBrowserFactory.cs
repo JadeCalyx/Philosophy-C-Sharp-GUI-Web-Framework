@@ -40,10 +40,21 @@ namespace jcWebGuiTools
         /// </summary>
         /// <param name="browser_type">The browser_type.</param>
         /// <returns></returns>
-       public jcBrowser Get_a_new_browser_instance(string browser_type)
+       public jcBrowser Get_a_new_browser_instance(string of_type)
         {
-            return GetBrowser(browser_type);
+            return GetBrowser(of_type);
         }
+        /// <summary>
+        /// Alias for GetBrowser.
+        /// </summary>
+        /// <param name="browser_type">The browser_type.</param>
+        /// <returns></returns>
+        public jcBrowser open_a_browser(string of_type)
+        {
+            return GetBrowser(of_type);
+        }
+
+
         /// <summary>
         /// Alias for GetBrowser.
         /// </summary>

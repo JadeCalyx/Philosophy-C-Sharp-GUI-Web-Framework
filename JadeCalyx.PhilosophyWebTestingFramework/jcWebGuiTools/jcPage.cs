@@ -101,6 +101,42 @@ namespace jcWebGuiTools
             return this;
         }
         /// <summary>
+        /// Alias for Click()
+        /// Clicks the specified object_handle.
+        /// </summary>
+        /// <param name="object_handle">The object_handle.</param>
+        /// <returns></returns>
+        public jcPage click(string object_handle)
+        {
+            return Click(object_handle);
+        }
+
+
+        /// <summary>
+        /// Gets the web list.
+        /// If element is type of web list (ul or ol) then returns as list of li items.
+        /// Otherwise, throws error.
+        /// </summary>
+        /// <param name="objectHandle">The object handle.</param>
+        /// <returns></returns>
+        public List<jcElementWrapper> GetWebList(string objectHandle)
+        {
+            var lookupInfo = _objectAtlas.GetLooukupInfo(objectHandle);
+            var el = getElement(lookupInfo, null);
+            return el.ThrowIfNotFound(objectHandle).GetAsList();
+        }
+        /// <summary>
+        /// Alias for GetWebList()
+        /// Get_webpage_lists the specified object_handle.
+        /// </summary>
+        /// <param name="object_handle">The object_handle.</param>
+        /// <returns></returns>
+        public List<jcElementWrapper> get_webpage_list(string object_handle)
+        {
+            return GetWebList(object_handle);
+        }
+
+        /// <summary>
         /// Gets the element.
         /// </summary>
         /// <param name="lookupInfo">The lookup information.</param>

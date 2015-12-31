@@ -18,7 +18,7 @@ namespace jcWebGuiTools
     /// </summary>
     public class jcBrowser
     {
-        public thisClass to, and;
+        public thisClass to, and, ask, tell, the;
         IWebDriver _driver;
         jcAddressAtlas _addressAtlas;
         string _site;
@@ -32,7 +32,7 @@ namespace jcWebGuiTools
         /// <param name="urlPrefix">The URL prefix. The base url to be prefixed onto any address.</param>
         public jcBrowser(string driverType, string site, string urlPrefix)
         {
-            to = and = this;
+            to = and = ask = tell = the = this;
             _site = site;
             _addressAtlas = new jcAddressAtlas(urlPrefix, site);
             setrDriver(driverType);
@@ -56,6 +56,22 @@ namespace jcWebGuiTools
             return _currPage;
         }
         /// <summary>
+        /// Alias for GetPage().
+        /// </summary>
+        /// <returns></returns>
+        public jcPage act_on_the_displayed_page()
+        {
+            return GetPage();
+        }
+        /// <summary>
+        /// Address_the_current_pages this instance.
+        /// </summary>
+        /// <returns></returns>
+        public jcPage page()
+        {
+            return GetPage();
+        }
+        /// <summary>
         /// Goes to the web page reprsented by the passed page handle.
         /// </summary>
         /// <param name="handle">The page handle.</param>
@@ -72,6 +88,15 @@ namespace jcWebGuiTools
         /// <param name="handle">The handle.</param>
         /// <returns></returns>
         public jcPage Goto_page(string handle)
+        {
+            return GotoPage(handle);
+        }
+        /// <summary>
+        /// Alias for GotoPage
+        /// </summary>
+        /// <param name="handle">The handle.</param>
+        /// <returns></returns>
+        public jcPage goto_page(string handle)
         {
             return GotoPage(handle);
         }
