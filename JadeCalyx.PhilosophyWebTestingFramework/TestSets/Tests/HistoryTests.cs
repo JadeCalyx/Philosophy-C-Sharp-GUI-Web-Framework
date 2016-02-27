@@ -7,10 +7,13 @@ using jcWebGuiTools;
 using NUnit.Framework;
 using TestSets.Utilities;
 using Common;
+using Common.NUnitExtensions;
+
 using thisClass = TestSets.Tests.HistoryTests;
 
 namespace TestSets.Tests
 {
+    [Feature("this is the feature")]
     class HistoryTests
     {
         private thisClass I, my, ask, the, to;
@@ -47,25 +50,15 @@ namespace TestSets.Tests
             browser.Close();
         }
 
-        /// <summary>
-        /// Validates that the main page seach performs as expected.
-        /// Stories: Wiki-101, Wiki-153
-        /// Bugs: Wiki-937
-        /// </summary>
         [Test]
-        [Category("GUI")]
-        [Category("History")]
-        [Property("Summary", @"
-            Validate the history link takes you to the correct page.")]
-        [Property("Scenario", @"
+        [Category("demo")]
+        [Stories("WIK-321")]
+        [Bugs("WIK-123")]
+        [Scenario(@"Validate the history link takes you to the correct page.
             Given I am on the home page
             When I click the view history link
             Then I am taken to the view history page")]
-        [Property("Details", @"
-            This test determines if the history link takes you to the correct page.")]
-        [Property("Stories", @"")]
-        [Property("Bugs", @"")]
-        [TestCase("firefox")]
+        [Remarks(@"Free form text goes here.")]
         [TestCase("chrome")]
         public void OpenPageHistory(string browserType)
         {
@@ -79,29 +72,27 @@ namespace TestSets.Tests
         }
 
         [Test]
+        [Category("demo")]
         [Category("GUI")]
         [Category("History")]
-        [Property("Summary", @"
-            Validate the link to limit the number of entries works as expected.")]
-        [Property("Scenario", @"
+        [Scenario(@"Validate the link to limit the number of entries works as expected.
             Given I am on the home page
             When I click the view history link
             And I click on the link to display a specific number of history items
             Then the correct number of entries is displayed")]
-        [Property("Details", @"
-            This test validates the link to limit the number of entries works as expected.")]
-        [Property("Stories", @"")]
-        [Property("Bugs", @"")]
+        [Remarks(@"This test validates the link to limit the number of entries works as expected.")]
+        [Stories(@"")]
+        [Bugs(@"")]
         [TestCase("chrome", "main-page", "limit-to-20-anchor", 20)]
-        [TestCase("chrome", "archery-page", "limit-to-50-anchor", 50)]
-        [TestCase("chrome", "main-page", "limit-to-100-anchor", 100)]
-        [TestCase("chrome", "archery-page", "limit-to-250-anchor", 250)]
-        [TestCase("chrome", "main-page", "limit-to-500-anchor", 500)]
-        [TestCase("firefox", "archery-page", "limit-to-20-anchor", 20)]
-        [TestCase("firefox", "main-page", "limit-to-50-anchor", 50)]
-        [TestCase("firefox", "archery-page", "limit-to-100-anchor", 100)]
-        [TestCase("firefox", "main-page", "limit-to-250-anchor", 250)]
-        [TestCase("firefox", "archery-page", "limit-to-500-anchor", 500)]
+        //[TestCase("chrome", "archery-page", "limit-to-50-anchor", 50)]
+        //[TestCase("chrome", "main-page", "limit-to-100-anchor", 100)]
+        //[TestCase("chrome", "archery-page", "limit-to-250-anchor", 250)]
+        //[TestCase("chrome", "main-page", "limit-to-500-anchor", 500)]
+        //[TestCase("firefox", "archery-page", "limit-to-20-anchor", 20)]
+        //[TestCase("firefox", "main-page", "limit-to-50-anchor", 50)]
+        //[TestCase("firefox", "archery-page", "limit-to-100-anchor", 100)]
+        //[TestCase("firefox", "main-page", "limit-to-250-anchor", 250)]
+        //[TestCase("firefox", "archery-page", "limit-to-500-anchor", 500)]
         public void FilterHistoryPageListEntries(string browser_type,
             string subjectPage, string anchorToClick, int expectedCount)
         {
